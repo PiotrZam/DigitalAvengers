@@ -1,0 +1,25 @@
+{
+    "posts": [
+      {
+        "content": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum",
+        "author": "John Smith",
+        "timestamp": "October 13, 2014 11:13:00"
+      },
+      {
+        "content": "Lorem2 Ipsum2Lorem2 Ipsum2 Lorem2 Ipsum2 Lorem2 Ipsum2 Lorem2 Ipsum2 Lorem2 Ipsum2 Lorem2 Ipsum2",
+        "author": "Paul Smith",
+        "timestamp": "April 12, 2014 11:13:00"
+      },
+      {
+        "content": "Lorem3 Ipsum3 Lorem3 Ipsum3 Lorem3 Ipsum3 Lorem3 Ipsum3 Lorem3 Ipsum3 ",
+        "author": "Peter Smith",
+        "timestamp": "January 26, 2014 11:13:00"
+      },
+      {
+        "content": "Lorem4 Ipsum4 Lorem4 Ipsum4 Lorem4 Ipsum4 Lorem4 Ipsum4 Lorem4 Ipsum4 Lorem4 Ipsum4 Lorem4 Ipsum4",
+        "author": "Edward Smith",
+        "timestamp": "December 2, 2023 11:13:00"
+      }
+    ]
+  }
+  

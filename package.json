@@ -1,0 +1,22 @@
+{
+  "name": "digital-avengers",
+  "version": "1.0.0",
+  "description": "Digital Avengers submission for Interdisciplinary Project module 2023/24: A WebApp for RGU Startup Accelerator",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PiotrZam/DigitalAvengers.git"
+  },
+  "author": "Piotr Zambrzycki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PiotrZam/DigitalAvengers/issues"
+  },
+  "homepage": "https://github.com/PiotrZam/DigitalAvengers#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
