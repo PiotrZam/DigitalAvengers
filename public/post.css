@@ -1,0 +1,111 @@
+.main-layout {
+    display: grid;
+    grid-template-rows: flex; 
+    grid-template-columns: 700px 200px; /* Set the width for the columns */
+    gap: 60px;
+    padding: 10px;
+    padding-top: 20px;
+  }
+  
+  h1{
+    justify-content: center; 
+    align-items: center;
+    text-align: center; 
+    color: #d7d8d7;
+  }
+  
+  h2{
+    justify-content: center; 
+    align-items: center;
+    text-align: center; 
+    color: #d7d8d7;
+  }
+
+
+  
+  .main-layout > div {
+    background-color: rgb(44, 44, 63);
+    border: 1px solid rgb(11, 11, 11);
+    text-align: flex;
+    font-size: 12px;
+    border-radius: 3px;
+    justify-content: center; 
+  }
+
+  #groups{
+    grid-template-rows: 200px;
+
+  }
+
+  
+  
+  #create-post, #show-form  {
+    padding: 10px 20px;
+    border: none;
+    background-color: #5b93eb;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  #show-form{
+    align-self: flex-end;
+
+  }
+  
+  #posts {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: top; 
+    height: fit-content 
+  }
+
+  #post-form {
+    display: none;
+    padding: white;
+}
+
+  .file-input{
+    display: none; /* Hide the file input element */
+  }
+
+  #username, #description{
+    padding: 10px;
+    width: 60%;
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  #image{
+    padding: 10px;
+    width: 60%;
+    flex-grow: 1;
+    padding: 10px;
+    
+    border-radius: 5px;
+
+  }
+  
+  .file-label,.Username {
+    padding: 10px;
+    background-color: #d7d8d7;
+    color: #141313;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+
+  
+  @media screen and (max-width: 768px) {
+    .main-layout {
+      grid-template-columns: repeat(2, 1fr); 
+    }
+  }
+  /* Media query for screens narrower than 480px */
+@media screen and (max-width: 480px) {
+    .main-layout {
+      grid-template-columns: 1fr; /* Single column for very small screens */
+    }
+  }
