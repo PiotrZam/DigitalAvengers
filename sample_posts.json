@@ -1,0 +1,36 @@
+{
+  "posts": [
+    {
+      "description": "This is a sample post.",
+      "username": "User1",
+      "formattedDateTime": "2023-11-10 10:00 AM",
+      "title": "Sample Post 1",
+      "images": [
+        "https://i.redd.it/xolf3rrs0ck91.jpg"
+      ]
+    },
+    {
+      "description": "Another sample post.",
+      "username": "User2",
+      "formattedDateTime": "2023-11-10 11:30 AM",
+      "title": "Sample Post 2",
+      "images": [
+        "https://i.redd.it/7446w76r3s741.png"
+      ]
+    },
+    {
+      "description": "adsadad",
+      "username": "dasdad",
+      "formattedDateTime": "10/11/2023, 17:08:17",
+      "title": "adada",
+      "images": "undefined"
+    },
+    {
+      "description": "gdfgdg",
+      "username": "gfgfgdg",
+      "formattedDateTime": "10/11/2023, 17:08:46",
+      "title": "dgfgd",
+      "images": []
+    }
+  ]
+}
