@@ -6,24 +6,25 @@ body {
 }
 
 #header {
-    background-color: #0077B5;
+    background-color: rgb(77, 2, 65);
     color: white;
     padding: 10px;
     text-align: center;
 }
 
 #menu {
-    background-color: #333;
+    background-color: rgb(77, 2, 65);
     color: white;
     text-align: center;
     padding: 15px;
     display: flex;
     justify-content: center;
+    flex-grow: 1; /* Allow the navigation to take up available space */
 }
 
 #menu a {
     text-decoration: none;
-    color: #ccc;
+    color: white;
     margin: 0 15px;
 }
 
@@ -46,4 +47,147 @@ body {
     background-color: white;
     padding: 10px;
     border-radius: 5px;
+}
+
+
+.dashboard {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.post {
+    background-color: #fff;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: auto; /* Allow the height to adjust dynamically based on content */
+}
+
+.contents {
+    color: #666;
+    line-height: 1.5em; /* Adjust line height for better visibility */
+    word-wrap: break-word; /* Ensure text wraps within the post container */
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.author {
+    font-weight: bold;
+}
+
+.date {
+    color: #555;
+}
+
+.title {
+    color: #333;
+}
+
+.contents {
+    color: #666;
+}
+
+.like-button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.like-button:hover {
+    background-color: #2184b6;
+}
+
+#post-form {
+    display: none;
+}
+
+.blur {
+    filter: blur(5px);
+}
+
+#add-post-button {
+    position: fixed;
+    bottom: 20px; /* Adjust as needed for vertical positioning */
+    right: 20px;
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+#add-post-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+
+#post-form {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+#post-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+#post-form input,
+#post-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#post-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#post-form button:hover {
+    background-color: #45a049;
+}
+
+#cancel-button {
+    background-color: #ccc;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#cancel-button:hover {
+    background-color: #b3b3b3;
 }
