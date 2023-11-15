@@ -1,4 +1,5 @@
 // main.js
+var userId = '1234';
 
 $(document).ready(function () {
     const addPostButton = $("#add-post-button");
@@ -70,7 +71,7 @@ $(document).ready(function () {
 
                 // Add each post to the the wrapper
                 posts.forEach(function (post) {
-                    const newPost = createPostElement(post.author, post.date, post.title, post.content);
+                    const newPost = createPostElement(post.id, post.author, post.date, post.title, post.content, post.likes);
                     postsWrapper.append(newPost);
                 });
             },
@@ -80,25 +81,72 @@ $(document).ready(function () {
         });
     }
 
-    function createPostElement(author, date, title, content) {
+    function createPostElement(id, author, date, title, content, likes) {
         const postElement = $("<div>").addClass("post");
 
         postElement.html(`
+            <input type="hidden" class="post-id" value="${id}">
             <div class="post-header">
                 <span class="author">${author}</span>
                 <span class="date">${date}</span>
             </div>
             <h2 class="title">${title}</h2>
             <p class="contents">${content}</p>
-            <button class="like-button">Like</button>
+            <div class="like-container">
+                <button class="like-button" onclick="likePost(this)">
+                    <i class="far fa-thumbs-up"></i> Like
+                </button>
+                <div class="likesCount">
+                    <p class="likesCountText">${likes.length}</p>
+                </div>
+            </div>
         `);
 
         return postElement;
     }
 
-    function getCurrentDate() {
-        const currentDate = new Date();
-        const options = { month: "long", day: "numeric", year: "numeric" };
-        return currentDate.toLocaleDateString("en-US", options);
-    }
 });
+
+function likePost(buttonElement) {
+    var postElement = buttonElement.closest('.post');
+    var postId = postElement.querySelector('.post-id').value;
+    var likesCount = postElement.querySelector('.likesCountText');
+    console.log(postElement);
+    console.log('Like nr: ' + $(likesCount).text());
+    console.log('Post liked: ' + postId);
+
+   // if (postId == null) {
+        // Create the data to be sent in the request body
+        var data = {
+                    postId: postId,
+                    userId: userId
+                };
+
+        // Perform the server request using jQuery
+        $.ajax({
+            url: '/likePost',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (response) {
+                    // Handle the success response from the server
+                    console.log('Server response:', response);
+                    let theCount = parseInt($(likesCount).text()) + 1 
+                    $(likesCount).text(theCount); // Assuming the server returns the updated like count
+        
+            },
+            error: function (error) {
+                    // Handle the error response from the server
+                    console.error('There was a problem with the AJAX request:', error);
+            }
+        });
+//    } else {
+  //          console.error('Error: Post element not found.');
+    //}
+}
+
+function getCurrentDate() {
+    const currentDate = new Date();
+    const options = { month: "long", day: "numeric", year: "numeric" };
+    return currentDate.toLocaleDateString("en-US", options);
+}

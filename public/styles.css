@@ -191,3 +191,36 @@ body {
 #cancel-button:hover {
     background-color: #b3b3b3;
 }
+
+
+/* Your existing CSS */
+
+.like-container {
+    display: flex;
+    align-items: center;
+}
+
+.like-button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center; /* Center the content vertically */
+}
+
+.like-button i {
+    margin-right: 5px; /* Add space between the icon and the text */
+}
+
+.likesCount {
+    margin-left: 10px; /* Add space between the like button and likes count */
+}
+
+.likesCount p {
+    font-size: 12px; /* Adjust the font size for the likes count */
+    margin: 0; /* Remove margin for cleaner appearance */
+    color: #666; /* Adjust color for better visibility */
+}
