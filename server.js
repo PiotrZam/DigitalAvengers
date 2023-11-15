@@ -63,6 +63,14 @@ app.get('/getPosts', (req, res) => {
 });
 
 
+// server.js
+// ...
+
+function generateUniqueId() {
+    // Generate a unique ID (you can use a more sophisticated method if needed)
+    return Math.random().toString(36).substr(2, 9);
+}
+
 app.post('/addPost', (req, res) => {
     const { title, content } = req.body;
 
@@ -71,10 +79,12 @@ app.post('/addPost', (req, res) => {
     }
 
     const newPost = {
+        id: generateUniqueId(), // Assign a unique post ID
         author: 'Server Author', // You may modify this to get the actual author from the request
         date: new Date().toLocaleDateString(),
         title,
         content,
+        likes: []  // Initialize the likes array
     };
 
     // Read existing posts from 'posts.json'
@@ -100,7 +110,57 @@ app.post('/addPost', (req, res) => {
     });
 });
 
+app.post('/likePost', async (req, res) => {
+    try {
+        console.log(req.body);
 
+        var { postId, userId } = req.body;
+        let posts;
+
+        try {
+            const postsData = fs.readFileSync('posts.json', 'utf8');
+            posts = JSON.parse(postsData);
+            console.log('READ');
+        } catch (error) {
+            console.error('Error reading posts.json:', error.message);
+        }
+
+        // Find the post by ID
+        var post = posts.find(post => post.id === postId);
+        console.log(post);
+
+        if (post) {
+            // Check if the user has already liked the post
+            if
+            // Disabling for demo: User can like a post infinite nr of times  
+            //(!post.likes.includes(userId)) 
+            (true)
+            {
+                // Add the user ID to the likes array
+                post.likes.push(userId);
+
+                // Update the posts array
+                fs.writeFile('posts.json', JSON.stringify(posts, null, 2), (err) => {
+                    if (err) {
+                        console.error('Error adding like to posts.json:', err.message);
+                        return res.status(500).json({ success: false, error: 'Error Liking Post' });
+                    }
+            
+                    res.status(200).json({ success: true, message: 'Post liked successfully.' });
+                });
+
+               // res.json({ success: true, message: 'Post liked successfully.' });
+            } else {
+                res.status(400).json({ success: false, message: 'User has already liked the post.' });
+            }
+        } else {
+            res.status(404).json({ success: false, message: 'Post not found.' });
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ success: false, message: 'Internal server error.' });
+    }
+});
 
 // Start the server
 app.listen(port, () => {
