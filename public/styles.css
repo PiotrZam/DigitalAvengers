@@ -224,3 +224,71 @@ body {
     margin: 0; /* Remove margin for cleaner appearance */
     color: #666; /* Adjust color for better visibility */
 }
+
+
+/* Update or add these styles */
+.reactions-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.like-container,
+.comment-container {
+    display: flex;
+    align-items: center;
+}
+
+.comment-button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-left: 10px; /* Adjust the spacing between like and comment buttons */
+}
+
+.comment-button:hover {
+    background-color: #2980b9;
+}
+
+.add-comment-form {
+    display: none;
+    flex-direction: column;
+    margin-top: 10px; /* Adjust margin for space between button and form */
+}
+
+.comment-textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.add-comment-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-comment-button:hover {
+    background-color: #45a049;
+}
+
+.commentsCount {
+    margin-left: 10px; /* Add space between the like button and likes count */
+}
+
+.commentsCount p {
+    font-size: 12px; /* Adjust the font size for the likes count */
+    margin: 0; /* Remove margin for cleaner appearance */
+    color: #666; /* Adjust color for better visibility */
+}
