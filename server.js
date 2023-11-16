@@ -201,7 +201,7 @@ app.post('/addComment', async (req, res) => {
                         return res.status(500).json({ success: false, error: 'Error Adding Comment' });
                     }
             
-                    res.status(200).json({ success: true, message: 'Comment Added successfully.' });
+                    res.status(200).json(newComment);
                 });
 
         } else {

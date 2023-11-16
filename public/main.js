@@ -1,12 +1,11 @@
 // main.js
 const userId = '1234';
+const addPostButton = $("#add-post-button");
+const postForm = $("#post-form");
+const dashboard = $(".dashboard");
+const postsWrapper = $("#posts-wrapper");
 
 $(document).ready(function () {
-    const addPostButton = $("#add-post-button");
-    const postForm = $("#post-form");
-    const dashboard = $(".dashboard");
-    const postsWrapper = $("#posts-wrapper");
-
      // Fetch posts when the page is loaded or refreshed
      fetchPosts();
 
@@ -55,37 +54,33 @@ $(document).ready(function () {
         postsWrapper.removeClass("blur");
     });
 
-
-    function fetchPosts() {
-        // Fetch posts from the server using jQuery AJAX
-        $.ajax({
-            url: "/getPosts",
-            type: "GET",
-            dataType: "json",
-            success: function (posts) {
-                // Clear existing posts from the the wrapper
-                postsWrapper.empty();
-
-                // Add each post to the the wrapper
-                posts.forEach(function (post) {
-                    const newPost = createPostElement(post.id, post.author, post.date, post.title, post.content, post.likes, post.comments);
-                    postsWrapper.append(newPost);
-                });
-            },
-            error: function () {
-                console.error("Error fetching posts from the server.");
-            }
-        });
-    }
 });
+// End of document.ready
+
+function fetchPosts() {
+    // Fetch posts from the server using jQuery AJAX
+    $.ajax({
+        url: "/getPosts",
+        type: "GET",
+        dataType: "json",
+        success: function (posts) {
+            // Clear existing posts from the the wrapper
+            postsWrapper.empty();
+
+            // Add each post to the the wrapper
+            posts.forEach(function (post) {
+                const newPost = createPostElement(post.id, post.author, post.date, post.title, post.content, post.likes, post.comments);
+                displayComments(newPost, post.comments);
+                postsWrapper.append(newPost);
+            });
+        },
+        error: function () {
+            console.error("Error fetching posts from the server.");
+        }
+    });
+}
 
 function createPostElement(id, author, date, title, content, likes, comments) {
-    console.log(id)
-    console.log(author)
-    console.log(date)
-    console.log(title)
-    console.log(likes)
-
 
     let likesCount = 0;
     if(likes !== null) 
@@ -126,9 +121,13 @@ function createPostElement(id, author, date, title, content, likes, comments) {
             </div>
         </div>
     </div>
+
     <div class="add-comment-form" style="display: none;">
                 <textarea class="comment-textarea" placeholder="Add a comment"></textarea>
                 <button class="add-comment-button" onclick="addComment(this)">Post</button>
+    </div>
+
+    <div class="comments-section">
     </div>
     `);
 
@@ -191,6 +190,7 @@ function toggleComments(buttonElement) {
 
 function addComment(buttonElement) {
     const postElement = $(buttonElement).closest('.post'); 
+    const commentsWrapper = $(postElement).find('.comments-section');
     const commentTextarea = $(postElement).find('.comment-textarea');
     const postId = $(postElement).find('.post-id').val();
     const addCommentForm = $(postElement).find('.add-comment-form');
@@ -213,10 +213,15 @@ function addComment(buttonElement) {
         data: JSON.stringify(commentData),
         success: function (response) {
             // Handle the success response from the server
-            console.log('Comment added successfully:', response);
+            console.log('Comment added successfully');
+
+            //Add the comment
+            let comment = generateCommentHTML(response);
+            commentsWrapper.prepend(comment);
+
+            // increment comment count
             let theCount = parseInt($(commentsCount).text()) + 1 
             $(commentsCount).text(theCount);
-
             //Clear the text area:
             $(commentContent).val("");
         },
@@ -232,4 +237,24 @@ function getCurrentDate() {
     const currentDate = new Date();
     const options = { month: "long", day: "numeric", year: "numeric" };
     return currentDate.toLocaleDateString("en-US", options);
+}
+
+function generateCommentHTML(comment) {
+    const commentDiv = $('<div>').addClass('comment');
+    const commentAuthor = $('<span>').addClass('comment-author').text(comment.userId);
+    const commentDate = $('<span>').addClass('comment-date').text(comment.date);
+    const commentContent = $('<p>').addClass('comment-content').text(comment.content);
+
+    commentDiv.append(commentAuthor, commentDate, commentContent);
+    return commentDiv;
+}
+
+function displayComments(postElement, comments) {
+    const commentsSection = postElement.find('.comments-section');
+    commentsSection.empty(); // Clear previous comments to avoid duplication
+
+    comments.forEach(comment => {
+        let commentDiv = generateCommentHTML(comment);
+        commentsSection.append(commentDiv);
+    });
 }
