@@ -31,22 +31,19 @@ $(document).ready(function () {
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify({ title, content }),
-            success: function (response) {
-                if (response.success) {
+            success: function (post) {
                     // If the server returns a successful response, add the post to the post wrapper
-                    const newPost = createPostElement("Your Name", getCurrentDate(), title, content);
+                    const newPost = createPostElement(post.id, post.author, post.date, post.title, post.content, post.likes);
                     postsWrapper.prepend(newPost);
 
                     // Reset the form and hide it
                     postForm.trigger("reset").hide();
                     postsWrapper.removeClass("blur");
-                } else {
-                    alert("Error adding post. Please try again.");
-                }
             },
-            error: function () {
-                alert("Error adding post. Please try again.");
+            error: function() {
+                    alert("Error adding post. Please try again.");
             }
+
         });
     });
 
@@ -80,32 +77,46 @@ $(document).ready(function () {
             }
         });
     }
-
-    function createPostElement(id, author, date, title, content, likes) {
-        const postElement = $("<div>").addClass("post");
-
-        postElement.html(`
-            <input type="hidden" class="post-id" value="${id}">
-            <div class="post-header">
-                <span class="author">${author}</span>
-                <span class="date">${date}</span>
-            </div>
-            <h2 class="title">${title}</h2>
-            <p class="contents">${content}</p>
-            <div class="like-container">
-                <button class="like-button" onclick="likePost(this)">
-                    <i class="far fa-thumbs-up"></i> Like
-                </button>
-                <div class="likesCount">
-                    <p class="likesCountText">${likes.length}</p>
-                </div>
-            </div>
-        `);
-
-        return postElement;
-    }
-
 });
+
+function createPostElement(id, author, date, title, content, likes) {
+    console.log(id)
+    console.log(author)
+    console.log(date)
+    console.log(title)
+    console.log(likes)
+
+
+    let likesCount = "";
+    if(likes !== null) 
+    {
+        if(likes.length > 0)
+        {
+            likesCount = likes.length
+        }
+    }
+    const postElement = $("<div>").addClass("post");
+
+    postElement.html(`
+        <input type="hidden" class="post-id" value="${id}">
+        <div class="post-header">
+            <span class="author">${author}</span>
+            <span class="date">${date}</span>
+        </div>
+        <h2 class="title">${title}</h2>
+        <p class="contents">${content}</p>
+        <div class="like-container">
+            <button class="like-button" onclick="likePost(this)">
+                <i class="far fa-thumbs-up"></i> Like
+            </button>
+            <div class="likesCount">
+                <p class="likesCountText">${likesCount}</p>
+            </div>
+        </div>
+    `);
+
+    return postElement;
+}
 
 function likePost(buttonElement) {
     var postElement = buttonElement.closest('.post');
