@@ -292,3 +292,27 @@ body {
     margin: 0; /* Remove margin for cleaner appearance */
     color: #666; /* Adjust color for better visibility */
 }
+
+.comments-section {
+    margin-top: 20px;
+}
+
+.comment {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+}
+
+.comment-author {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.comment-date {
+    margin-left: 25px;
+}
+
+.comment-content {
+    margin-top: 5px;
+}
