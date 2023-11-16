@@ -1,0 +1,50 @@
+{
+    "users": [
+      { "id": "1",
+        "username": "user1",
+        "password": "password1",
+        "firstName": "John",
+        "lastName": "Smith",
+        "emailAddress": "example1@exmple.com",
+        "isPriviliged": true,
+        "accountActive": true 
+      },
+      { "id": "2",
+        "username": "user2",
+        "password": "password2",
+        "firstName": "Michael",
+        "lastName": "Logan",
+        "emailAddress": "example2@exmple.com",
+        "isPriviliged": true,
+        "accountActive": true
+      },
+      {"id": "3",
+        "username": "user3",
+        "password": "password3",
+        "firstName": "Katherine",
+        "lastName": "Wick",
+        "emailAddress": "example3@exmple.com",
+        "isPriviliged": false,
+        "accountActive": true
+      },
+      {"id": "4",
+        "username": "user4",
+        "password": "password4",
+        "firstName": "Paul",
+        "lastName": "McGregor",
+        "emailAddress": "example4@exmple.com",
+        "isPriviliged": false,
+        "accountActive": true
+      },
+      {"id": "5",
+        "username": "user5",
+        "password": "password5",
+        "firstName": "Jessica",
+        "lastName": "Black",
+        "emailAddress": "example5@exmple.com",
+        "isPriviliged": false,
+        "accountActive": true
+      }
+    ]
+  }
+  
