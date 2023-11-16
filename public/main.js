@@ -1,5 +1,5 @@
 // main.js
-var userId = '1234';
+const userId = '1234';
 
 $(document).ready(function () {
     const addPostButton = $("#add-post-button");
@@ -33,7 +33,7 @@ $(document).ready(function () {
             data: JSON.stringify({ title, content }),
             success: function (post) {
                     // If the server returns a successful response, add the post to the post wrapper
-                    const newPost = createPostElement(post.id, post.author, post.date, post.title, post.content, post.likes);
+                    const newPost = createPostElement(post.id, post.author, post.date, post.title, post.content, post.likes, post.comments);
                     postsWrapper.prepend(newPost);
 
                     // Reset the form and hide it
@@ -68,7 +68,7 @@ $(document).ready(function () {
 
                 // Add each post to the the wrapper
                 posts.forEach(function (post) {
-                    const newPost = createPostElement(post.id, post.author, post.date, post.title, post.content, post.likes);
+                    const newPost = createPostElement(post.id, post.author, post.date, post.title, post.content, post.likes, post.comments);
                     postsWrapper.append(newPost);
                 });
             },
@@ -79,7 +79,7 @@ $(document).ready(function () {
     }
 });
 
-function createPostElement(id, author, date, title, content, likes) {
+function createPostElement(id, author, date, title, content, likes, comments) {
     console.log(id)
     console.log(author)
     console.log(date)
@@ -92,8 +92,13 @@ function createPostElement(id, author, date, title, content, likes) {
     {
         likesCount = likes.length
     }
-    const postElement = $("<div>").addClass("post");
 
+    let commentsCount = 0;
+    if (comments !== null) {
+        commentsCount = comments.length;
+    }
+
+    const postElement = $("<div>").addClass("post");
     postElement.html(`
         <input type="hidden" class="post-id" value="${id}">
         <div class="post-header">
@@ -102,6 +107,8 @@ function createPostElement(id, author, date, title, content, likes) {
         </div>
         <h2 class="title">${title}</h2>
         <p class="contents">${content}</p>
+
+    <div class="reactions-container">
         <div class="like-container">
             <button class="like-button" onclick="likePost(this)">
                 <i class="far fa-thumbs-up"></i> Like
@@ -110,6 +117,19 @@ function createPostElement(id, author, date, title, content, likes) {
                 <p class="likesCountText">${likesCount}</p>
             </div>
         </div>
+        <div class="comment-container">
+            <button class="comment-button" onclick="toggleComments(this)">
+                <i class="far fa-comment"></i> Comment
+            </button>
+            <div class="commentsCount">
+                <p class="commentsCountText">${commentsCount}</p>
+            </div>
+        </div>
+    </div>
+    <div class="add-comment-form" style="display: none;">
+                <textarea class="comment-textarea" placeholder="Add a comment"></textarea>
+                <button class="add-comment-button" onclick="addComment(this)">Post</button>
+    </div>
     `);
 
     return postElement;
@@ -152,6 +172,61 @@ function likePost(buttonElement) {
   //          console.error('Error: Post element not found.');
     //}
 }
+
+function toggleComments(buttonElement) {
+    const postElement = $(buttonElement).closest('.post');
+    const commentsWrapper = $(postElement).find('.comments-wrapper');
+    const addCommentForm = $(postElement).find('.add-comment-form');
+    const commentContent = $(postElement).find('.comment-textarea');
+    
+    console.log("Post element: " + postElement);
+    console.log("Comment content: " + commentContent.val());
+
+    // Clear the text area
+    $(commentContent).val("");
+
+    commentsWrapper.slideToggle();
+    addCommentForm.slideToggle();
+}
+
+function addComment(buttonElement) {
+    const postElement = $(buttonElement).closest('.post'); 
+    const commentTextarea = $(postElement).find('.comment-textarea');
+    const postId = $(postElement).find('.post-id').val();
+    const addCommentForm = $(postElement).find('.add-comment-form');
+    const commentContent = commentTextarea.val();
+    var commentsCount = $(postElement).find('.commentsCountText');
+
+    const commentData = {
+        userId: userId,
+        postId: postId,
+        content: commentContent
+    };
+
+    addCommentForm.slideToggle();
+    console.log(commentData)
+
+    $.ajax({
+        url: '/addComment',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(commentData),
+        success: function (response) {
+            // Handle the success response from the server
+            console.log('Comment added successfully:', response);
+            let theCount = parseInt($(commentsCount).text()) + 1 
+            $(commentsCount).text(theCount);
+
+            //Clear the text area:
+            $(commentContent).val("");
+        },
+        error: function (error) {
+            // Handle the error response from the server
+            console.error('Error adding comment:', error);
+        }
+    });
+}
+
 
 function getCurrentDate() {
     const currentDate = new Date();

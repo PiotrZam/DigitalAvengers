@@ -1,0 +1,161 @@
+[
+  {
+    "id": "wfohwgdfn",
+    "author": "Server Author",
+    "date": "16/11/2023",
+    "title": "New post",
+    "content": "New content",
+    "likes": [
+      "1234",
+      "1234"
+    ],
+    "comments": [
+      {
+        "id": "wx0rhhpbk",
+        "postId": "wfohwgdfn",
+        "userId": "1234",
+        "date": "16/11/2023",
+        "content": "Some content"
+      },
+      {
+        "id": "y8ruwbro2",
+        "postId": "wfohwgdfn",
+        "userId": "1234",
+        "date": "16/11/2023",
+        "content": "zz"
+      }
+    ]
+  },
+  {
+    "id": "6loczzrh0",
+    "author": "Server Author",
+    "date": "16/11/2023",
+    "title": "aaa",
+    "content": "111",
+    "likes": [
+      "1234",
+      "1234",
+      "1234",
+      "1234"
+    ],
+    "comments": [
+      {
+        "id": "ev17xi3a3",
+        "postId": "6loczzrh0",
+        "userId": "1234",
+        "date": "16/11/2023",
+        "content": "lk"
+      },
+      {
+        "id": "gmrluvdzp",
+        "postId": "6loczzrh0",
+        "userId": "1234",
+        "date": "16/11/2023",
+        "content": "Some comment"
+      },
+      {
+        "id": "cdzkz5p28",
+        "postId": "6loczzrh0",
+        "userId": "1234",
+        "date": "16/11/2023",
+        "content": "aa"
+      },
+      {
+        "id": "8jbd8y73w",
+        "postId": "6loczzrh0",
+        "userId": "1234",
+        "date": "16/11/2023",
+        "content": "z"
+      },
+      {
+        "id": "edc77lg8c",
+        "postId": "6loczzrh0",
+        "userId": "1234",
+        "date": "16/11/2023",
+        "content": "zc"
+      }
+    ]
+  },
+  {
+    "id": "28iwa9s4x",
+    "author": "Server Author",
+    "date": "15/11/2023",
+    "title": "zz",
+    "content": "aa",
+    "likes": [
+      "1234",
+      "1234",
+      "1234",
+      "1234",
+      "1234",
+      "1234",
+      "1234",
+      "1234",
+      "1234",
+      "1234",
+      "1234",
+      "1234",
+      "1234",
+      "1234",
+      "1234",
+      "1234",
+      "1234",
+      "1234",
+      "1234",
+      "1234",
+      "1234",
+      "1234"
+    ],
+    "comments": [
+      {
+        "id": "i1po7tejv",
+        "postId": "28iwa9s4x",
+        "userId": "1234",
+        "date": "16/11/2023",
+        "content": "q"
+      },
+      {
+        "id": "sai48yn2t",
+        "postId": "28iwa9s4x",
+        "userId": "1234",
+        "date": "16/11/2023",
+        "content": "2"
+      },
+      {
+        "id": "xrkz4dqqf",
+        "postId": "28iwa9s4x",
+        "userId": "1234",
+        "date": "16/11/2023",
+        "content": "q"
+      },
+      {
+        "id": "ltkep7jot",
+        "postId": "28iwa9s4x",
+        "userId": "1234",
+        "date": "16/11/2023",
+        "content": "a"
+      },
+      {
+        "id": "ta824v34r",
+        "postId": "28iwa9s4x",
+        "userId": "1234",
+        "date": "16/11/2023",
+        "content": "a"
+      },
+      {
+        "id": "c3x4ufnsd",
+        "postId": "28iwa9s4x",
+        "userId": "1234",
+        "date": "16/11/2023",
+        "content": "qw"
+      },
+      {
+        "id": "il5dd7xkm",
+        "postId": "28iwa9s4x",
+        "userId": "1234",
+        "date": "16/11/2023",
+        "content": "qq"
+      }
+    ]
+  }
+]

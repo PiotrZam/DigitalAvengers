@@ -22,7 +22,7 @@ app.post('/login', (req, res) => {
     console.log(password);
 
     // Load the login credentials from the JSON file
-    fs.readFile('login_credentials.json', 'utf8', (err, data) => {
+    fs.readFile('./data/users.json', 'utf8', (err, data) => {
         if (err) {
             console.log('Error...');
             res.status(500).json({ error: 'Server error: Could not read login credentials' });
@@ -46,7 +46,7 @@ app.post('/login', (req, res) => {
 
 app.get('/getPosts', (req, res) => {
     // Read posts from 'posts.json'
-    fs.readFile('posts.json', 'utf8', (err, data) => {
+    fs.readFile('./data/posts.json', 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading posts.json:', err.message);
             return res.status(500).json({ error: 'Error fetching posts' });
@@ -84,13 +84,14 @@ app.post('/addPost', (req, res) => {
         date: new Date().toLocaleDateString(),
         title,
         content,
-        likes: []  // Initialize the likes array
+        likes: [],  // Initialize the likes array
+        comments: []
     };
 
     // Read existing posts from 'posts.json'
     let posts = [];
     try {
-        const postsData = fs.readFileSync('posts.json', 'utf8');
+        const postsData = fs.readFileSync('./data/posts.json', 'utf8');
         posts = JSON.parse(postsData);
     } catch (error) {
         console.error('Error reading posts.json:', error.message);
@@ -100,7 +101,7 @@ app.post('/addPost', (req, res) => {
     posts.unshift(newPost);
 
     // Write the updated posts back to 'posts.json'
-    fs.writeFile('posts.json', JSON.stringify(posts, null, 2), (err) => {
+    fs.writeFile('./data/posts.json', JSON.stringify(posts, null, 2), (err) => {
         if (err) {
             console.error('Error writing to posts.json:', err.message);
             return res.status(500).json({ success: false, error: 'Error saving post' });
@@ -118,7 +119,7 @@ app.post('/likePost', async (req, res) => {
         let posts;
 
         try {
-            const postsData = fs.readFileSync('posts.json', 'utf8');
+            const postsData = fs.readFileSync('./data/posts.json', 'utf8');
             posts = JSON.parse(postsData);
             console.log('READ');
         } catch (error) {
@@ -140,7 +141,7 @@ app.post('/likePost', async (req, res) => {
                 post.likes.push(userId);
 
                 // Update the posts array
-                fs.writeFile('posts.json', JSON.stringify(posts, null, 2), (err) => {
+                fs.writeFile('./data/posts.json', JSON.stringify(posts, null, 2), (err) => {
                     if (err) {
                         console.error('Error adding like to posts.json:', err.message);
                         return res.status(500).json({ success: false, error: 'Error Liking Post' });
@@ -153,6 +154,56 @@ app.post('/likePost', async (req, res) => {
             } else {
                 res.status(400).json({ success: false, message: 'User has already liked the post.' });
             }
+        } else {
+            res.status(404).json({ success: false, message: 'Post not found.' });
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ success: false, message: 'Internal server error.' });
+    }
+});
+
+app.post('/addComment', async (req, res) => {
+    try {
+        console.log(req.body);
+
+        var { postId, userId, date, content } = req.body;
+        let posts;
+
+        try {
+            const postsData = fs.readFileSync('./data/posts.json', 'utf8');
+            posts = JSON.parse(postsData);
+            console.log('READ');
+        } catch (error) {
+            console.error('Error reading posts.json:', error.message);
+        }
+
+        // Find the post by ID
+        var post = posts.find(post => post.id === postId);
+        
+        const newComment = {
+            id: generateUniqueId(), // Assign a unique comment ID
+            postId,
+            userId,
+            date: new Date().toLocaleDateString(),
+            content
+        };
+
+        if (post) {
+
+                // Add the user ID to the likes array
+                post.comments.push(newComment);
+
+                // Update the posts array
+                fs.writeFile('./data/posts.json', JSON.stringify(posts, null, 2), (err) => {
+                    if (err) {
+                        console.error('Error adding comment to posts.json:', err.message);
+                        return res.status(500).json({ success: false, error: 'Error Adding Comment' });
+                    }
+            
+                    res.status(200).json({ success: true, message: 'Comment Added successfully.' });
+                });
+
         } else {
             res.status(404).json({ success: false, message: 'Post not found.' });
         }
