@@ -87,13 +87,10 @@ function createPostElement(id, author, date, title, content, likes) {
     console.log(likes)
 
 
-    let likesCount = "";
+    let likesCount = 0;
     if(likes !== null) 
     {
-        if(likes.length > 0)
-        {
-            likesCount = likes.length
-        }
+        likesCount = likes.length
     }
     const postElement = $("<div>").addClass("post");
 
