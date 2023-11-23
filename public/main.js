@@ -7,7 +7,7 @@ const postsWrapper = $("#posts-wrapper");
 
 $(document).ready(function () {
      // Fetch posts when the page is loaded or refreshed
-     fetchPosts();
+     fetchPosts(0);
 
     addPostButton.on("click", function () {
         // Blur the background
@@ -23,13 +23,19 @@ $(document).ready(function () {
         // Get values from the form
         const title = $("#post-title").val();
         const content = $("#post-content").val();
+        const postsWrapper1 = $("#posts-wrapper");
+        const groupID = $('.dashboard-group-id').val();
+
+        console.log(groupID);
+
+        console.log(`Group ID read: ${groupID}`);
 
         // Send the AJAX request using jQuery
         $.ajax({
             url: "/addPost",
             type: "POST",
             contentType: "application/json",
-            data: JSON.stringify({ title, content }),
+            data: JSON.stringify({ groupID, title, content }),
             success: function (post) {
                     // If the server returns a successful response, add the post to the post wrapper
                     const newPost = createPostElement(post.id, post.author, post.date, post.title, post.content, post.likes, post.comments);
@@ -57,16 +63,26 @@ $(document).ready(function () {
 });
 // End of document.ready
 
-function fetchPosts() {
+function fetchPosts(groupID) {
+    console.log(`groupID: ${groupID}`);
+
     // Fetch posts from the server using jQuery AJAX
     $.ajax({
         url: "/getPosts",
         type: "GET",
         dataType: "json",
+        data: {groupID: groupID},
         success: function (posts) {
             // Clear existing posts from the the wrapper
             postsWrapper.empty();
 
+            var groupIDHidden = $('<input/>', {
+                type: 'hidden',
+                class: 'dashboard-group-id',
+                value: groupID
+            });
+
+            postsWrapper.append(groupIDHidden);
             // Add each post to the the wrapper
             posts.forEach(function (post) {
                 const newPost = createPostElement(post.id, post.author, post.date, post.title, post.content, post.likes, post.comments);

@@ -45,6 +45,11 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/getPosts', (req, res) => {
+
+    const groupID = req.query.groupID;
+
+    console.log(`Fetching posts for group with GroupID: ${groupID}`);
+
     // Read posts from 'posts.json'
     fs.readFile('./data/posts.json', 'utf8', (err, data) => {
         if (err) {
@@ -54,7 +59,9 @@ app.get('/getPosts', (req, res) => {
 
         try {
             const posts = JSON.parse(data);
-            res.status(200).json(posts);
+
+            const groupPosts = posts.filter(post => post.groupID == groupID);
+            res.status(200).json(groupPosts);
         } catch (error) {
             console.error('Error parsing posts.json:', error.message);
             res.status(500).json({ error: 'Error fetching posts' });
@@ -72,7 +79,9 @@ function generateUniqueId() {
 }
 
 app.post('/addPost', (req, res) => {
-    const { title, content } = req.body;
+    const { groupID, title, content } = req.body;
+
+    console.log(`Adding a post to a group with ID: ${groupID}`);
 
     if (!title || !content) {
         return res.status(400).json({ success: false, error: 'Title and content are required' });
@@ -84,6 +93,7 @@ app.post('/addPost', (req, res) => {
         date: new Date().toLocaleDateString(),
         title,
         content,
+        groupID,
         likes: [],  // Initialize the likes array
         comments: []
     };
@@ -212,6 +222,7 @@ app.post('/addComment', async (req, res) => {
         res.status(500).json({ success: false, message: 'Internal server error.' });
     }
 });
+
 
 // Start the server
 app.listen(port, () => {
