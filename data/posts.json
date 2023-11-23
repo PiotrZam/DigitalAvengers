@@ -1,5 +1,74 @@
 [
   {
+    "id": "marlfd6c7",
+    "author": "Server Author",
+    "date": "23/11/2023",
+    "title": "And one more",
+    "content": "Some content",
+    "groupID": "1",
+    "likes": [],
+    "comments": [
+      {
+        "id": "u0pil31qv",
+        "postId": "marlfd6c7",
+        "userId": "2",
+        "date": "23/11/2023",
+        "content": "Some comment"
+      }
+    ]
+  },
+  {
+    "id": "4rd4gtuol",
+    "author": "Server Author",
+    "date": "23/11/2023",
+    "title": "And another one",
+    "content": "Some content",
+    "groupID": "1",
+    "likes": [],
+    "comments": [
+      {
+        "id": "ia1e8ceyv",
+        "postId": "4rd4gtuol",
+        "userId": "2",
+        "date": "23/11/2023",
+        "content": "Another comment"
+      }
+    ]
+  },
+  {
+    "id": "qv5sqonqh",
+    "author": "Server Author",
+    "date": "23/11/2023",
+    "title": "Some Post in Group 1 ",
+    "content": "Some content",
+    "groupID": "1",
+    "likes": [],
+    "comments": []
+  },
+  {
+    "id": "t4o7e0opy",
+    "author": "Server Author",
+    "date": "23/11/2023",
+    "title": "New POst ##1212",
+    "content": "Some comments",
+    "groupID": "0",
+    "likes": [
+      "1234",
+      "1234",
+      "1234",
+      "1234"
+    ],
+    "comments": [
+      {
+        "id": "qi78h6hf3",
+        "postId": "t4o7e0opy",
+        "userId": "1234",
+        "date": "23/11/2023",
+        "content": "AS"
+      }
+    ]
+  },
+  {
     "id": "o6901eswl",
     "author": "Server Author",
     "date": "23/11/2023",

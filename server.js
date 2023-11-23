@@ -283,6 +283,38 @@ app.get('/getUserPosts/', (req, res) => {
 });
 
 
+app.get('/getUserGroups/:userID', (req, res) => {
+    const userID = req.params.userID;
+
+    console.log(`User ID: ${userID}`);
+
+    // Read groups from 'groups.json'
+    fs.readFile('./data/groups.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading groups.json:', err.message);
+            return res.status(500).json({ error: 'Error fetching groups' });
+        }
+
+        try {
+            const groups = JSON.parse(data);
+
+            // Filter groups where the user is a member
+            const userGroups = groups
+                .filter(group => group.members.includes(parseInt(userID)))
+                .map(({ id, name }) => ({ id, name }));
+
+            console.log(`User groups: ${userGroups}`);
+
+            res.status(200).json(userGroups);
+        } catch (error) {
+            console.error('Error parsing groups.json:', error.message);
+            res.status(500).json({ error: 'Error fetching groups' });
+        }
+    });
+});
+
+
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
