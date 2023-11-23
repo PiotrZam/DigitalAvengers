@@ -1,12 +1,18 @@
 // main.js
-const userId = '1234';
+const userId = '2';
 const addPostButton = $("#add-post-button");
 const postForm = $("#post-form");
 const dashboard = $(".dashboard");
 const postsWrapper = $("#posts-wrapper");
+const groupsContainer = $("#group-list");
 
 $(document).ready(function () {
+
+    // Fetches user groups to be displayed in the dashboard page sidebar
+    fetchUserGroups(userId);
+
      // Fetch posts when the page is loaded or refreshed
+     // At the moment using '0' as hardcoded user group
      fetchPosts(0);
 
     addPostButton.on("click", function () {
@@ -58,6 +64,21 @@ $(document).ready(function () {
 
         // Remove the blur effect from the background
         postsWrapper.removeClass("blur");
+    });
+
+    $("#group-list").on("click", function () {
+        const selectedGroup = event.target.closest('.dashboard-group-list-group'); // Assuming each group has a class 'group'
+
+        //console.log(`Selected group: ${selectedGroup.value}`);
+
+        if (selectedGroup) {
+            //const groupId = selectedGroup.querySelector('.dashboard-group-list-group-id').value; 
+            const groupId = event.target.querySelector('.dashboard-group-list-group-id').value;
+
+            console.log(`Selected group: ${groupId}`);
+
+            fetchPosts(groupId); // Call the fetchPosts function with the selected group ID
+        }
     });
 
 });
@@ -272,5 +293,37 @@ function displayComments(postElement, comments) {
     comments.forEach(comment => {
         let commentDiv = generateCommentHTML(comment);
         commentsSection.append(commentDiv);
+    });
+}
+
+function fetchUserGroups(userId) {
+    $.ajax({
+        url: `/getUserGroups/${userId}`, // Replace with your server endpoint
+        type: "GET",
+        dataType: "json",
+        success: function (groups) {
+            const userGroupsList = $("#user-groups-list");
+            userGroupsList.empty();
+
+            groups.forEach(group => {
+                const listItem = $("<li>");
+                listItem.addClass("dashboard-group-list-group");
+                listItem.text(group.name);
+
+                // Create a hidden input for each group's ID
+                const hiddenInput = $("<input>", {
+                    type: "hidden",
+                    class: "dashboard-group-list-group-id",
+                    value: group.id
+                });
+
+                // Append the group name and hidden input to the list
+                listItem.append(hiddenInput);
+                userGroupsList.append(listItem);
+            });
+        },
+        error: function () {
+            console.error("Error fetching user groups.");
+        }
     });
 }

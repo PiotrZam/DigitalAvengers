@@ -366,3 +366,14 @@ body {
 .comment-content {
     margin-top: 5px;
 }
+
+
+.sidebar {
+    margin-right: 20px;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
