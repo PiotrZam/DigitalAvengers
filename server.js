@@ -223,6 +223,65 @@ app.post('/addComment', async (req, res) => {
     }
 });
 
+app.get('/getUserProfile', (req, res) => {
+    // You can replace this with your actual user ID retrieval logic
+    const userId = '2';
+
+    // Read user data from a JSON file (replace with your actual data source)
+    fs.readFile('./data/profiles.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading profiles.json:', err.message);
+            return res.status(500).json({ error: 'Error fetching user profile' });
+        }
+
+        try {
+            const profiles = JSON.parse(data);
+
+            // Check if profiles is an array
+            if (Array.isArray(profiles.profiles)) {
+                const userProfile = profiles.profiles.find(profile => profile.id === userId);
+                console.log(userProfile)
+
+                if (userProfile) {
+                    res.status(200).json(userProfile);
+                } else {
+                    res.status(404).json({ error: 'User profile not found' });
+                }
+            } else {
+                res.status(500).json({ error: 'Invalid data in profiles.json' });
+            }
+        } catch (error) {
+            console.error('Error parsing profiles.json:', error.message);
+            res.status(500).json({ error: 'Error fetching user profile' });
+        }
+    });
+});
+
+app.get('/getUserPosts/', (req, res) => {
+    const userId = '2';
+
+    // Read posts from 'posts.json'
+    fs.readFile('./data/posts.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading posts.json:', err.message);
+            return res.status(500).json({ error: 'Error fetching posts' });
+        }
+
+        try {
+            const posts = JSON.parse(data);
+
+            // Filter posts based on the user ID
+            const userPosts = posts.filter(post => post.id === userId);
+            console.log(userPosts)
+
+            res.status(200).json(userPosts);
+        } catch (error) {
+            console.error('Error parsing posts.json:', error.message);
+            res.status(500).json({ error: 'Error fetching posts' });
+        }
+    });
+});
+
 
 // Start the server
 app.listen(port, () => {
