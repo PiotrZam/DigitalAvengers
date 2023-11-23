@@ -45,6 +45,11 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/getPosts', (req, res) => {
+
+    const groupID = req.query.groupID;
+
+    console.log(`Fetching posts for group with GroupID: ${groupID}`);
+
     // Read posts from 'posts.json'
     fs.readFile('./data/posts.json', 'utf8', (err, data) => {
         if (err) {
@@ -54,7 +59,9 @@ app.get('/getPosts', (req, res) => {
 
         try {
             const posts = JSON.parse(data);
-            res.status(200).json(posts);
+
+            const groupPosts = posts.filter(post => post.groupID == groupID);
+            res.status(200).json(groupPosts);
         } catch (error) {
             console.error('Error parsing posts.json:', error.message);
             res.status(500).json({ error: 'Error fetching posts' });
@@ -72,7 +79,9 @@ function generateUniqueId() {
 }
 
 app.post('/addPost', (req, res) => {
-    const { title, content } = req.body;
+    const { groupID, title, content } = req.body;
+
+    console.log(`Adding a post to a group with ID: ${groupID}`);
 
     if (!title || !content) {
         return res.status(400).json({ success: false, error: 'Title and content are required' });
@@ -84,6 +93,7 @@ app.post('/addPost', (req, res) => {
         date: new Date().toLocaleDateString(),
         title,
         content,
+        groupID,
         likes: [],  // Initialize the likes array
         comments: []
     };
@@ -212,6 +222,98 @@ app.post('/addComment', async (req, res) => {
         res.status(500).json({ success: false, message: 'Internal server error.' });
     }
 });
+
+app.get('/getUserProfile', (req, res) => {
+    // You can replace this with your actual user ID retrieval logic
+    const userId = '2';
+
+    // Read user data from a JSON file (replace with your actual data source)
+    fs.readFile('./data/profiles.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading profiles.json:', err.message);
+            return res.status(500).json({ error: 'Error fetching user profile' });
+        }
+
+        try {
+            const profiles = JSON.parse(data);
+
+            // Check if profiles is an array
+            if (Array.isArray(profiles.profiles)) {
+                const userProfile = profiles.profiles.find(profile => profile.id === userId);
+                console.log(userProfile)
+
+                if (userProfile) {
+                    res.status(200).json(userProfile);
+                } else {
+                    res.status(404).json({ error: 'User profile not found' });
+                }
+            } else {
+                res.status(500).json({ error: 'Invalid data in profiles.json' });
+            }
+        } catch (error) {
+            console.error('Error parsing profiles.json:', error.message);
+            res.status(500).json({ error: 'Error fetching user profile' });
+        }
+    });
+});
+
+app.get('/getUserPosts/', (req, res) => {
+    const userId = '2';
+
+    // Read posts from 'posts.json'
+    fs.readFile('./data/posts.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading posts.json:', err.message);
+            return res.status(500).json({ error: 'Error fetching posts' });
+        }
+
+        try {
+            const posts = JSON.parse(data);
+
+            // Filter posts based on the user ID
+            const userPosts = posts.filter(post => post.id === userId);
+            console.log(userPosts)
+
+            res.status(200).json(userPosts);
+        } catch (error) {
+            console.error('Error parsing posts.json:', error.message);
+            res.status(500).json({ error: 'Error fetching posts' });
+        }
+    });
+});
+
+
+app.get('/getUserGroups/:userID', (req, res) => {
+    const userID = req.params.userID;
+
+    console.log(`User ID: ${userID}`);
+
+    // Read groups from 'groups.json'
+    fs.readFile('./data/groups.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading groups.json:', err.message);
+            return res.status(500).json({ error: 'Error fetching groups' });
+        }
+
+        try {
+            const groups = JSON.parse(data);
+
+            // Filter groups where the user is a member
+            const userGroups = groups
+                .filter(group => group.members.includes(parseInt(userID)))
+                .map(({ id, name }) => ({ id, name }));
+
+            console.log(`User groups: ${userGroups}`);
+
+            res.status(200).json(userGroups);
+        } catch (error) {
+            console.error('Error parsing groups.json:', error.message);
+            res.status(500).json({ error: 'Error fetching groups' });
+        }
+    });
+});
+
+
 
 // Start the server
 app.listen(port, () => {
