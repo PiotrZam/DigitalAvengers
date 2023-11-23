@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Main Dashboard</title>
+    
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+</head>
+<body>
+   
+    <header>
+        <div class="logo">
+          <img src="img/Logorgu.PNG" alt="Logo">
+        </div>
+        <nav class="nav">
+            <!--  navigation links  -->
+          <ul>
+            <a href="main.html"><i class="fa-solid fa-house"></i></a>
+            <a href="index.html"><i class="fa-solid fa-square-plus"></i></a>
+            <a href="#1"><i class="fa-solid fa-user-group"></i></a>
+            <a href="#2"><i class="fa-solid fa-bell"></i></a>
+            <a href="#3"><i class="fa-solid fa-gear"></i></a>
+            <a href="login.html"><i class="fa-solid fa-user"></i></a>
+          </ul>
+        </nav>
+      </header>
+<section id="slides">
+    <div class="carousel-container">
+        <div class="carousel-track">
+            <div class="carousel-slide">
+                <img src="img/rgu8.jpg" alt="Image 1">
+                <img src="img/rgu1.jpg" alt="Image 2">
+            </div>
+            <div class="carousel-slide">
+                <img src="img/rgu2.jpg" alt="Image 3">
+                <img src="img/rgu3.jpg" alt="Image 4">
+            </div>
+            <div class="carousel-slide">
+                <img src="img/rgu7.jpg" alt="Image 5">
+                <img src="img/rgu9.jpg" alt="Image 6">
+            </div>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+           <!-- MIDDLE SECTION WITH 2 CONTAINERS -->
+         <div class="middle-section">
+             <div class="flex-container">
+                <div style="flex-grow: 6">
+                    <h4 class="animate-charcter"> WELCOME TO RGU STARTUP ACCELERATOR</h4>
+                    <p class="main-text">Welcome to RGU StartUp Accelerator, your central platform for reconnecting with fellow innovators, engaging with like-minded groups, and staying updated on the latest developments in the program. 
+                        For those who have been a vital part of our journey over the years, we invite you to continue fostering connections and exploring new possibilities within our vibrant community. 
+                        If you're an integral part of our community with insights to share or if you've been part of the program in previous years, our platform offers you a space to reconnect, exchange ideas, and stay engaged with the ongoing activities. Reflect on your journey and contribute to the collective growth of our network.
+                        For those who have been part of our program, your wealth of experience is valued. Join us as we continue this journey together at RGU StartUp Accelerator!
+                        </p>
+                </div>
+                <div id="resources-container" style="flex-grow: 2">
+                    <h4 id="resources-title">Resources</h4>
+                    <p class="main-text"><a href="https://www.rgu.ac.uk/business-innovation/innovation-rgu/supporting-startups/startup-accelerator#anchor-3">  Eligibility</a></p>
+                    <p class="main-text"> <a href="https://www.rgu.ac.uk/business-innovation/innovation-rgu/supporting-startups/startup-accelerator#anchor-2">Benefits</a></p>
+                    <p class="main-text"><a href="https://www.rgu.ac.uk/business-innovation/innovation-rgu/supporting-startups/startup-facilities">Facilities</a></p>  
+                </div>
+             </div>
+         </div>
+
+          <!-- NEWS SECTION WITH 2 CONTAINERS -->
+
+          <div class="middle-section">
+            <div class="flex-container">
+                <div id="share-container" class="flex-grow-3">
+                    <p id="share-text">Share</p>
+                   
+                    <div class="social-icons">
+                        <a href="https://www.twitter.com" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.facebook.com" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                
+                
+                </div>
+               <div style="flex-grow: 6">
+                   <h4 class="main-titles2">Latest News</h4>
+                   <div class="article-container">
+                    <img src="img/aisha.jpg" alt="Profile Photo" class="article-img">
+                    <div class="article-content">
+                        <h4 class="article-title">Scotland is bursting with entrepreneurs</h4>
+                        <p class="article-description"> Aisha Kasim, StartUp Manager at Robert Gordon University, penned her thoughts in The Scotsman on Scotland's bursting innovation scene as we approach Global Entrepreneurship Week...Read more...</p>
+                        <h5 class="article-date">Date: [20/11/2023]</h5>
+                    </div>
+                </div>
+               </div>
+            </div>
+        </div>
+         
+
+</section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="legal-section">
+            <p><a href="mailto:info@example.com">Contact Us</a></p>
+            <p>&copy; 2023 DIGITAL AVENGERS. All rights reserved.</p>
+            <p><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+        </div>
+
+    </footer>
+
+
+</body>
+<script src="main2.js"></script>
+</html>
