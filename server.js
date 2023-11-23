@@ -1,10 +1,14 @@
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser'); // Require the body-parser module
 
+
 const app = express();
 const port = 3000;
+
+
 
 // Set up static file serving for the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
@@ -12,6 +16,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Add the body-parser middleware to handle JSON and form data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Set up session middleware
+app.use(session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: true
+}));
 
 // Define a route for the login endpoint
 app.post('/login', (req, res) => {
@@ -34,6 +45,9 @@ app.post('/login', (req, res) => {
 
             const user = credentials.users.find(user => user.username === username && user.password === password);
             if (user) {
+                // Set a session variable to indicate the user is logged in
+                req.session.loggedIn = true;
+                req.session.username = username;
                 res.status(200).json({ message: 'Login successful' });
             } else {
                 res.status(401).json({ error: 'Invalid username or password' });
@@ -42,6 +56,12 @@ app.post('/login', (req, res) => {
             res.status(500).json({ error: 'Server error: Could not parse login credentials' });
         }
     });
+});
+
+// Logout route
+app.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/');
 });
 
 app.get('/getPosts', (req, res) => {
@@ -61,6 +81,15 @@ app.get('/getPosts', (req, res) => {
         }
     });
 });
+
+app.get('/getUser', (req, res) => {
+    try {
+        res.status(200).send(req.session.username);
+    } catch (error) {
+        res.status(500).send("Error fetching username");
+    }
+
+})
 
 
 // server.js
@@ -213,7 +242,11 @@ app.post('/addComment', async (req, res) => {
     }
 });
 
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
+
+
+

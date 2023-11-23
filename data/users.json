@@ -44,7 +44,18 @@
         "emailAddress": "example5@exmple.com",
         "isPriviliged": false,
         "accountActive": true
+      },
+      {"id": "6",
+        "username": "test",
+        "password": "test",
+        "firstName": "Jessca",
+        "lastName": "Back",
+        "emailAddress": "exaple5@exmple.com",
+        "isPriviliged": true,
+        "accountActive": true
       }
+      
+
     ]
   }
   

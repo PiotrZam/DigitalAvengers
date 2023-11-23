@@ -6,8 +6,10 @@ const dashboard = $(".dashboard");
 const postsWrapper = $("#posts-wrapper");
 
 $(document).ready(function () {
-     // Fetch posts when the page is loaded or refreshed
-     fetchPosts();
+    // Fetch posts when the page is loaded or refreshed
+    fetchPosts();
+    getUser();
+    
 
     addPostButton.on("click", function () {
         // Blur the background
@@ -21,6 +23,7 @@ $(document).ready(function () {
         event.preventDefault();
 
         // Get values from the form
+        // const user = get current user
         const title = $("#post-title").val();
         const content = $("#post-content").val();
 
@@ -56,6 +59,30 @@ $(document).ready(function () {
 
 });
 // End of document.ready
+
+function getUser() {
+    $.ajax({
+        url: "/getUser",
+        type: "GET",
+        dataType: "text",
+        success: function(username) {
+            if (username) {
+                console.log(username);
+                tag = document.createElement("a");
+                tag.setAttribute('href', '/logout');
+                text = document.createTextNode("Logout");
+                tag.appendChild(text);
+                document.getElementById("menu").appendChild(tag);
+            }
+            else {
+                location.href = "/login.html";
+            }
+        },
+        error: function() {
+            console.error("Error fetching username");
+        }
+    })
+}
 
 function fetchPosts() {
     // Fetch posts from the server using jQuery AJAX
