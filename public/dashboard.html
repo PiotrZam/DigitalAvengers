@@ -15,12 +15,11 @@
 
     <nav id="menu">
         <a href="main.html"><i class="fa-solid fa-house"></i></a>
-        <a href="index.html"><i class="fa-solid fa-square-plus"></i></a>
-        <a href="profile.html"><i class="fa-solid fa-user-group"></i></a>
-        <a href="#1"><i class="fa-solid fa-user-group"></i></a>
+        <a href="dashboard.html"><i class="fa-solid fa-square-plus"></i></a>
+        <a href="profile.html"><i class="fa-solid fa-user"></i></a>
+        <a href="login.html"><i class="fa-solid fa-user-group"></i></a>
         <a href="#2"><i class="fa-solid fa-bell"></i></a>
         <a href="#3"><i class="fa-solid fa-gear"></i></a>
-        <a href="login.html"><i class="fa-solid fa-user"></i></a>
     </nav>
 
     <div class="dashboard">
@@ -43,15 +42,26 @@
         </div>
        
         <!-- A section for displaying user groups -->
-        <div class="sidebar">
+        <div class="dashboard-sidebar">
             <div id="group-list">
-                <h2>User Groups</h2>
+                <h3>User Groups</h3>
                 <ul id="user-groups-list"></ul>
+            </div>
+
+            <div id="uploaded-files-button-container">
+                <h3>Uploaded Files</h3>
+                <button id="uploaded-files-button">See the Files</button>
+                <button id="upload-file-button">Upload a File</button>
+            </div>
+
+            <div id="group-members-list-button-container">
+                <h3>See Other Group Members</h3>
+                <button id="group-members-list-button">Group Members</button>
             </div>
         </div>
     
     </div>
     
 </body>
-<script src="main.js"></script>
+<script src="dashboard.js"></script>
 </html>

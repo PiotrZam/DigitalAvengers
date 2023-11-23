@@ -1,4 +1,4 @@
-// main.js
+// dashboard.js
 const userId = '2';
 const addPostButton = $("#add-post-button");
 const postForm = $("#post-form");
