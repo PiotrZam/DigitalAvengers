@@ -171,5 +171,25 @@
         "content": "qq"
       }
     ]
+  },
+  {
+    "id": "2",
+    "author": "Michael Logan",
+    "date": "16/11/2023",
+    "title": "Obama is epic",
+    "content": "here is some text explaining how and why Obama is epic",
+    "likes": [
+      "1234",
+      "1234"
+    ],
+    "comments": [
+      {
+        "id": "wx0rhhpbk",
+        "postId": "wfohwgdfn",
+        "userId": "1234",
+        "date": "16/11/2023",
+        "content": "Some content"
+      }
+    ]
   }
 ]

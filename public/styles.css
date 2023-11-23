@@ -35,12 +35,59 @@ body {
     background-color: white;
 }
 
-#sidebar {
-    flex: 1;
-    background-color: #f1f1f1;
-    padding: 10px;
-    border-radius: 5px;
+
+.sidebar {
+    position:absolute;
+    top: 400px;
+    right: 0;
+    width: 20%; /* Adjust the width as needed */
+    box-sizing: border-box;
+    padding: 20px; /* Adjust the padding as needed */
+    background-color: #f0f0f0; /* Set the background color */
+    border-left: 1px solid #ddd; /* Add a border to separate it from the content */
+    /* height: 100vh; /* Set the height to fill the entire viewport */
+    overflow-y: auto; /* Add scroll if content exceeds the height */
 }
+
+/* Style for the sidebar items (optional) */
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 10px;
+    padding: 8px;
+    background-color: #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sidebar li:hover {
+    background-color: #ccc;
+}
+
+.user-info {
+    max-width: 800px;
+    margin: 20px auto;
+    
+}
+
+.profile-picture-container {
+    position: relative;
+    width: 100px; /* Set the desired size of the circle */
+    height: 100px; /* Should be the same as width for a perfect circle */
+    overflow: hidden;
+    border-radius: 50px; /* Ensures a circular shape */
+}
+
+.profile-picture {
+    display: block;
+    height: auto; /* Maintain aspect ratio */
+    width: 100%; /* Ensures the image takes the full width of its container */
+    border-radius: 50px; /* Makes the pfp a circle */
+}
+
 
 #content {
     flex: 4;
@@ -51,6 +98,11 @@ body {
 
 
 .dashboard {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.post-history {
     max-width: 800px;
     margin: 20px auto;
 }
@@ -192,8 +244,6 @@ body {
     background-color: #b3b3b3;
 }
 
-
-/* Your existing CSS */
 
 .like-container {
     display: flex;

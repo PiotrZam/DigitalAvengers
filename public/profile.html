@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="header">
+        <h1>User Profile</h1>
+    </div>
+
+    <!-- User Information -->
+    <div class="user-info">
+        <div class="profile-picture-container">
+            <img src="https://pbs.twimg.com/profile_images/994592419705274369/RLplF55e_400x400.jpg" alt="Profile Picture" class="profile-picture">
+        </div>
+            
+       <h2 id="profile-name">User Name</h2>
+        <p id="profile-description">Brief description about the user.</p>
+        <p id="profile-email">Email: user@example.com</p>
+        <p id="profile-phone">0-800-Call-Bob</p>
+    </div>
+
+    <!-- Post History -->
+    <div class="post-history">
+        <h2>Post History</h2>
+        <div class="posts-wrapper">
+            <!-- User's posts will be dynamically added here -->
+            <!-- You can use JavaScript to fetch and populate this section -->
+        </div>
+    </div>
+
+    <!-- Sidebar with User Groups -->
+    <div class="sidebar">
+        <h2>User Groups</h2>
+        <ul>
+            <li>Group 1</li>
+            <li>Group 2</li>
+            <li>Group 3</li>
+            <!-- Add more groups as needed -->
+        </ul>
+    </div>
+
+    
+    <script src="main.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>
